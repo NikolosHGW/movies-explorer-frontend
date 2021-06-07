@@ -1,0 +1,39 @@
+.navtab {
+  margin-top: 151px;
+}
+
+.navtab__ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navtab__li {
+  display: flex;
+  margin-right: 10px;
+}
+
+.navtab__li:last-child {
+  margin-right: 0;
+}
+
+.navtab__a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 96px;
+  height: 36px;
+  background-color: #E8E8E8;
+  border-radius: 10px;
+  color: #FFFFFF;
+  transition: opacity .4s linear;
+}
+
+.navtab__a:hover {
+  opacity: .4;
+}
