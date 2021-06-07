@@ -1,3 +1,4 @@
+import AboutProject from '../AboutProject/AboutProject';
 import Content from '../Content/Content';
 import Header from '../Header/Header';
 import Promo from '../Promo/Promo';
@@ -9,6 +10,7 @@ export default function Main() {
       <Header />
       <Content>
         <Promo />
+        <AboutProject />
       </Content>
     </div>
   );
