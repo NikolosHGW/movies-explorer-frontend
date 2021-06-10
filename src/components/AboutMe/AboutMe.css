@@ -1,0 +1,76 @@
+.about-me {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 70px;
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.about-me__heading {
+  margin: 0;
+  border-bottom: 1px solid #000000;
+  box-sizing: border-box;
+  padding-bottom: 23px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+}
+
+.about-me__name {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin: 0 0 18px;
+}
+
+.about-me__job {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.about-me__about {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 26px 0 99px;
+  max-width: 600px;
+}
+
+.about-me__container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 66px;
+}
+
+.about-me__container-avatar {
+  max-width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.about-me__social {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.about-me__social-line {
+  display: flex;
+  margin-right: 20px;
+}
+
+.about-me__social-link {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  transition: opacity .4s linear;
+}
+
+.about-me__social-link:hover {
+  opacity: .4;
+}

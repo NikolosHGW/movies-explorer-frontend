@@ -1,3 +1,4 @@
+import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
 import Content from '../Content/Content';
 import Header from '../Header/Header';
@@ -13,6 +14,7 @@ export default function Main() {
         <Promo />
         <AboutProject />
         <Techs />
+        <AboutMe />
       </Content>
     </div>
   );
