@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router';
 import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
@@ -7,6 +8,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <Main />
+        </Route>
+        <Route exact path='/movies'>
+          <Movies />
         </Route>
       </Switch>
     </>

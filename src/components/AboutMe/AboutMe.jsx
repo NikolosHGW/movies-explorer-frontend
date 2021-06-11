@@ -16,10 +16,10 @@ export default function AboutMe() {
           </p>
           <ul className='about-me__social'>
             <li className='about-me__social-line'>
-              <a className='about-me__social-link' href='https://www.facebook.com/' target='_blank'>Facebook</a>
+              <a className='about-me__social-link' href='https://www.facebook.com/' target='_blank' rel="noreferrer">Facebook</a>
             </li>
             <li className='about-me__social-line'>
-              <a className='about-me__social-link' href='https://github.com/NikolosHGW' target='_blank'>Github</a>
+              <a className='about-me__social-link' href='https://github.com/NikolosHGW' target='_blank' rel="noreferrer">Github</a>
             </li>
           </ul>
         </div>

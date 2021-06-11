@@ -9,7 +9,7 @@ export default function Header() {
       <Link className='header__logo-link' to='/'>
         <img src={logo} alt='Логотип' />
       </Link>
-      <Navigation isLogged={false} />
+      <Navigation isLogged={true} />
     </header>
   );
 }

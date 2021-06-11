@@ -9,21 +9,21 @@ export default function Portfolio() {
           <a
             className='portfolio__link'
             href='https://nikoloshgw.github.io/how-to-learn/index.html'
-            target='_blank'
+            target='_blank' rel="noreferrer"
           >Статичный сайт</a>
         </li>
         <li className='portfolio__line'>
           <a
             className='portfolio__link'
             href='https://nikoloshgw.github.io/russian-travel/'
-            target='_blank'
+            target='_blank' rel="noreferrer"
           >Адаптивный сайт</a>
         </li>
         <li className='portfolio__line'>
           <a
             className='portfolio__link'
             href='https://nikoloshgw.github.io/react-mesto-auth/#/'
-            target='_blank'
+            target='_blank' rel="noreferrer"
           >Одностраничное приложение</a>
         </li>
       </ul>

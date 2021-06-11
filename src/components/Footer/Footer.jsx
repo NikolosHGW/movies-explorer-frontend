@@ -11,21 +11,21 @@ export default function Footer() {
             <a
               className='footer__link'
               href='https://praktikum.yandex.ru'
-              target='_blank'
+              target='_blank' rel="noreferrer"
             >Яндекс.Практикум</a>
           </li>
           <li className='footer__line'>
             <a
               className='footer__link'
               href='https://github.com/yandex-praktikum'
-              target='_blank'
+              target='_blank' rel="noreferrer"
             >Github</a>
           </li>
           <li className='footer__line'>
             <a
               className='footer__link'
               href='https://www.facebook.com/yandex.praktikum/'
-              target='_blank'
+              target='_blank' rel="noreferrer"
             >Facebook</a>
           </li>
         </ul>
