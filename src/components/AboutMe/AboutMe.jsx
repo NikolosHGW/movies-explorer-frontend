@@ -3,7 +3,7 @@ import avatar from '../../images/ava.jpg';
 
 export default function AboutMe() {
   return (
-    <section className='about-me'>
+    <section id='about-me' className='about-me'>
       <h2 className='about-me__heading'>Студент</h2>
       <div className='about-me__container'>
         <div className='about-me__container-info'>
@@ -16,10 +16,10 @@ export default function AboutMe() {
           </p>
           <ul className='about-me__social'>
             <li className='about-me__social-line'>
-              <a className='about-me__social-link' href='#'>Facebook</a>
+              <a className='about-me__social-link' href='https://www.facebook.com/' target='_blank'>Facebook</a>
             </li>
             <li className='about-me__social-line'>
-              <a className='about-me__social-link' href='#'>Github</a>
+              <a className='about-me__social-link' href='https://github.com/NikolosHGW' target='_blank'>Github</a>
             </li>
           </ul>
         </div>
