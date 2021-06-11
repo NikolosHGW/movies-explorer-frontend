@@ -1,6 +1,7 @@
 import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
 import Content from '../Content/Content';
+import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Portfolio from '../Portfolio/Portfolio';
 import Promo from '../Promo/Promo';
@@ -18,6 +19,7 @@ export default function Main() {
         <AboutMe />
         <Portfolio />
       </Content>
+      <Footer />
     </div>
   );
 }
