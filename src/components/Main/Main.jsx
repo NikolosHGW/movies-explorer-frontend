@@ -2,6 +2,7 @@ import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
 import Content from '../Content/Content';
 import Header from '../Header/Header';
+import Portfolio from '../Portfolio/Portfolio';
 import Promo from '../Promo/Promo';
 import Techs from '../Techs/Techs';
 import './Main.css';
@@ -15,6 +16,7 @@ export default function Main() {
         <AboutProject />
         <Techs />
         <AboutMe />
+        <Portfolio />
       </Content>
     </div>
   );
