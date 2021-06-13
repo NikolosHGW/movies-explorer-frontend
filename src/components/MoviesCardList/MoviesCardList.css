@@ -1,0 +1,9 @@
+.movies-card-list {
+  display: flex;
+  flex-direction: column;
+  padding: 70px 70px 80px;
+}
+
+.movies-card-list__container {
+  display: grid;
+}
