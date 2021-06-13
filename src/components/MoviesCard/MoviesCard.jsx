@@ -1,7 +1,7 @@
 import './MoviesCard.css';
 import cardImg from '../../images/card.png';
 
-export default function MoviesCard() {
+export default function MoviesCard({ buttonSelector }) {
   return (
     <article className='movies-card'>
       <a
@@ -16,7 +16,7 @@ export default function MoviesCard() {
           <h2 className='movies-card__heading'>33 слова о дизайне</h2>
           <span className='movies-card__duration'>1ч 47м</span>
         </div>
-        <button className='movies-card__like-button' type="button" aria-label="like"></button>
+        <button className={buttonSelector} type="button" aria-label="like"></button>
       </div>
       <img className='movies-card__img' src={cardImg} alt='Картинка фильма' />
     </article>

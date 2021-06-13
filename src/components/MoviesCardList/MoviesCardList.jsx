@@ -1,24 +1,20 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-export default function MoviesCardList() {
+export default function MoviesCardList({ cards, buttonSelector }) {
   return (
     <section className='movies-card-list'>
       <div className='movies-card-list__container'>
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {cards.map((card) => (
+          <MoviesCard
+            buttonSelector={buttonSelector}
+            key={card}
+          />
+        ))}
       </div>
-      <button className='movies-card-list__more-button'>Ещё</button>
+      {cards.length > 11 && (
+        <button className='movies-card-list__more-button'>Ещё</button>
+      )}
     </section>
   );
 }

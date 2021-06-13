@@ -1,4 +1,4 @@
-import './Movies.css';
+import './SavedMovies.css';
 import Header from '../Header/Header';
 import Content from '../Content/Content';
 import Footer from '../Footer/Footer';
@@ -6,17 +6,17 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import React from 'react';
 
-export default function Movies() {
-  const cards = React.useMemo(() => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], []);
+export default function SavedMovies() {
+  const cards = React.useMemo(() => [1, 2, 3], []);
 
   return (
-    <div className='movies'>
+    <div className='saved-movies'>
       <Header />
       <Content>
         <SearchForm />
         <MoviesCardList
           cards={cards}
-          buttonSelector='movies-card__like-button'
+          buttonSelector='movies-card__dislike-button'
         />
       </Content>
       <Footer />

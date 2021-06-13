@@ -66,11 +66,30 @@
   border-radius: 50px;
 }
 
+.movies-card__dislike-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url('../../images/dislike.min.svg');
+  z-index: 2;
+  cursor: pointer;
+  transition: box-shadow .4s linear;
+  border-radius: 50px;
+}
+
 .movies-card__like-button_active {
   background-image: url('../../images/likeActive.min.svg');
 }
 
 .movies-card__like-button:hover {
+  box-shadow: 1px 1px 10px #2BE080;
+}
+
+.movies-card__dislike-button:hover {
   box-shadow: 1px 1px 10px #2BE080;
 }
 

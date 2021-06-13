@@ -81,6 +81,7 @@
   justify-content: center;
   transition: opacity .4s linear;
   margin-top: 29px;
+  align-self: center;
 }
 
 .search-form__checkbox:hover {
