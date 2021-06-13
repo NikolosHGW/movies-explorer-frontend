@@ -12,7 +12,13 @@ export default function MoviesCardList() {
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
+        <MoviesCard />
       </div>
+      <button className='movies-card-list__more-button'>Ещё</button>
     </section>
   );
 }
