@@ -5,12 +5,3 @@
   height: 74px;
   padding: 0 70px;
 }
-
-.header__logo-link {
-  display: flex;
-  transition: opacity .4s linear;
-}
-
-.header__logo-link:hover {
-  opacity: .4;
-}

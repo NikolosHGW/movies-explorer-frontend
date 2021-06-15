@@ -3,6 +3,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Register from '../Register/Register';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route exact path='/profile'>
           <Profile />
+        </Route>
+        <Route exact path='/signup'>
+          <Register />
         </Route>
       </Switch>
     </>
