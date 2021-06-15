@@ -33,11 +33,12 @@ export default function Profile() {
                 inputsValues.nameValidMessage ? ' profile__input_type_error' : ''}`}
               value={inputsValues.name}
               onChange={handleProfileChange}
-              type="text"
-              name="name"
+              type='text'
+              name='name'
+              placeholder='Имя'
               required
-              minLength="2"
-              maxLength="40"
+              minLength='2'
+              maxLength='30'
             />
             <span className={`profile__input-error name-input-error${
               inputsValues.nameValid ? '' : ' profile__input-error_active'}`}
@@ -51,8 +52,9 @@ export default function Profile() {
                 inputsValues.emailValidMessage ? ' profile__input_type_error' : ''}`}
               value={inputsValues.email}
               onChange={handleProfileChange}
-              type="email"
-              name="email"
+              type='email'
+              name='email'
+              placeholder='Почта'
               required
             />
             <span className={`profile__input-error email-input-error${
@@ -63,8 +65,8 @@ export default function Profile() {
           </label>
         </fieldset>
         <button
-          className="profile__edit-button"
-          type="submit"
+          className='profile__edit-button'
+          type='submit'
         >
           Редактировать
         </button>

@@ -1,0 +1,34 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding-top: 246px;
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.page-not-found__error {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+}
+
+.page-not-found__text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin: 5px 0 184px;
+}
+
+.page-not-found__link {
+  text-decoration: none;
+  color: #3456F3;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  transition: opacity .4s linear;
+}
+
+.page-not-found__link:hover {
+  opacity: .4;
+}

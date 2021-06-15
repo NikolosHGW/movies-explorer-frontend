@@ -13,7 +13,7 @@ export default function MoviesCardList({ cards, buttonSelector }) {
         ))}
       </div>
       {cards.length > 11 && (
-        <button className='movies-card-list__more-button'>Ещё</button>
+        <button className='movies-card-list__more-button' type='button'>Ещё</button>
       )}
     </section>
   );

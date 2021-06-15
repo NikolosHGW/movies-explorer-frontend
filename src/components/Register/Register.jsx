@@ -35,8 +35,9 @@ export default function Register() {
               inputsValues.nameValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.name}
             onChange={handleProfileCreate}
-            type="text"
-            name="name"
+            type='text'
+            name='name'
+            placeholder='Имя'
             required
             minLength="2"
             maxLength="30"
@@ -54,8 +55,9 @@ export default function Register() {
               inputsValues.emailValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.email}
             onChange={handleProfileCreate}
-            type="email"
-            name="email"
+            type='email'
+            name='email'
+            placeholder='E-mail'
             required
           />
           <span className={`auth-form__input-error email-input-error${
@@ -71,10 +73,11 @@ export default function Register() {
               inputsValues.passwordValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.password}
             onChange={handleProfileCreate}
-            type="password"
-            name="password"
+            type='password'
+            name='password'
+            placeholder='Пароль'
             required
-            minLength="8"
+            minLength='8'
           />
           <span className={`auth-form__input-error password-input-error${
             inputsValues.passwordValid ? '' : ' auth-form__input-error_active'}`}
@@ -83,10 +86,10 @@ export default function Register() {
           </span>
         </label>
       </AuthForm>
-      <span className="register__span">
+      <span className='register__span'>
         Уже зарегистрированы? <Link
-          className="register__link"
-          to="/signin"
+          className='register__link'
+          to='/signin'
         >Войти</Link>
       </span>
     </div>

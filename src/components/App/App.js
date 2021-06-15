@@ -5,6 +5,7 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   return (
@@ -13,20 +14,23 @@ function App() {
         <Route exact path='/'>
           <Main />
         </Route>
-        <Route exact path='/movies'>
+        <Route path='/movies'>
           <Movies />
         </Route>
-        <Route exact path='/saved-movies'>
+        <Route path='/saved-movies'>
           <SavedMovies />
         </Route>
-        <Route exact path='/profile'>
+        <Route path='/profile'>
           <Profile />
         </Route>
-        <Route exact path='/signup'>
+        <Route path='/signup'>
           <Register />
         </Route>
-        <Route exact path='/signin'>
+        <Route path='/signin'>
           <Login />
+        </Route>
+        <Route path='*'>
+          <PageNotFound />
         </Route>
       </Switch>
     </>

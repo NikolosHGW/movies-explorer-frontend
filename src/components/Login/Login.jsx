@@ -32,8 +32,9 @@ export default function Login() {
               inputsValues.emailValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.email}
             onChange={handleLogin}
-            type="email"
-            name="email"
+            type='email'
+            name='email'
+            placeholder='E-mail'
             required
           />
           <span className={`auth-form__input-error email-input-error${
@@ -49,10 +50,11 @@ export default function Login() {
               inputsValues.passwordValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.password}
             onChange={handleLogin}
-            type="password"
-            name="password"
+            type='password'
+            name='password'
+            placeholder='Пароль'
             required
-            minLength="8"
+            minLength='8'
           />
           <span className={`auth-form__input-error password-input-error${
             inputsValues.passwordValid ? '' : ' auth-form__input-error_active'}`}
@@ -61,10 +63,10 @@ export default function Login() {
           </span>
         </label>
       </AuthForm>
-      <span className="login__span">
+      <span className='login__span'>
         Ещё не зарегистрированы? <Link
-          className="login__link"
-          to="/signup"
+          className='login__link'
+          to='/signup'
         >Регистрация</Link>
       </span>
     </div>
