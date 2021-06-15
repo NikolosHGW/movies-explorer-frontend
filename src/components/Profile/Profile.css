@@ -117,6 +117,7 @@
   line-height: 16px;
   transition: opacity .4s linear;
   cursor: pointer;
+  align-self: center;
 }
 
 .profile__exit-button:hover {

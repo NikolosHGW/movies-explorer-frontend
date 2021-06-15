@@ -1,22 +1,19 @@
-import './Register.css';
+import './Login.css';
 import AuthForm from '../AuthForm/AuthForm';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Register() {
+export default function Login() {
   const [inputsValues, setInputsValues] = React.useState({
-    name: '',
     email: '',
     password: '',
-    nameValid: true,
     emailValid: true,
     passwordValid: true,
-    nameValidMessage: '',
     emailValidMessage: '',
     passwordValidMessage: '',
   });
 
-  function handleProfileCreate(evt) {
+  function handleLogin(evt) {
     setInputsValues({
       ...inputsValues,
       [evt.target.name]: evt.target.value,
@@ -26,34 +23,15 @@ export default function Register() {
   }
 
   return (
-    <div className='register'>
-      <AuthForm buttonText='Зарегистрироваться' greeting='Добро пожаловать!'>
-        <label className='auth-form__label'>
-          <span>Имя</span>
-          <input
-            className={`auth-form__input auth-form__input_name${
-              inputsValues.nameValidMessage ? ' auth-form__input_type_error' : ''}`}
-            value={inputsValues.name}
-            onChange={handleProfileCreate}
-            type="text"
-            name="name"
-            required
-            minLength="2"
-            maxLength="30"
-          />
-          <span className={`auth-form__input-error name-input-error${
-            inputsValues.nameValid ? '' : ' auth-form__input-error_active'}`}
-          >
-            {inputsValues.nameValid ? '' : inputsValues.nameValidMessage}
-          </span>
-        </label>
+    <div className='login'>
+      <AuthForm buttonText='Войти' greeting='Рады видеть!'>
         <label className='auth-form__label'>
           <span>E-mail</span>
           <input
             className={`auth-form__input auth-form__input_email${
               inputsValues.emailValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.email}
-            onChange={handleProfileCreate}
+            onChange={handleLogin}
             type="email"
             name="email"
             required
@@ -70,7 +48,7 @@ export default function Register() {
             className={`auth-form__input auth-form__input_password${
               inputsValues.passwordValidMessage ? ' auth-form__input_type_error' : ''}`}
             value={inputsValues.password}
-            onChange={handleProfileCreate}
+            onChange={handleLogin}
             type="password"
             name="password"
             required
@@ -83,11 +61,11 @@ export default function Register() {
           </span>
         </label>
       </AuthForm>
-      <span className="register__span">
-        Уже зарегистрированы? <Link
-          className="register__link"
-          to="/signin"
-        >Войти</Link>
+      <span className="login__span">
+        Ещё не зарегистрированы? <Link
+          className="login__link"
+          to="/signup"
+        >Регистрация</Link>
       </span>
     </div>
   );

@@ -64,6 +64,15 @@
   padding: 0 15px;
   width: 396px;
   box-sizing: border-box;
+  transition: box-shadow .4s linear;
+}
+
+.auth-form__input:hover {
+  box-shadow: 1px 1px 10px rgba(220,220,220, .8);
+}
+
+.auth-form__input:focus {
+  box-shadow: 1px 1px 10px #3456F3;
 }
 
 .auth-form__input_type_error {
