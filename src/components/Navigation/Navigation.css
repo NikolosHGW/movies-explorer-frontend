@@ -1,4 +1,4 @@
-.navigation {
+.navigation__ul {
   display: flex;
   margin: 0;
   padding: 0;
@@ -42,44 +42,4 @@
   margin-left: 17px;
   border-radius: 4px;
   background: #F9F9F9 url('../../images/profile.min.svg') no-repeat center;
-}
-
-.navigation__line-logout {
-  display: flex;
-}
-
-.navigation__register-link {
-  display: flex;
-  text-decoration: none;
-  color: #000000;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  transition: opacity .4s linear;
-  margin-right: 30px;
-  align-self: center;
-}
-
-.navigation__register-link:hover {
-  opacity: .4;
-}
-
-.navigation__login-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 76px;
-  height: 32px;
-  text-decoration: none;
-  color: #000000;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  transition: opacity .4s linear;
-  background-color: #2BE080;
-  border-radius: 3px;
-}
-
-.navigation__login-link:hover {
-  opacity: .4;
 }

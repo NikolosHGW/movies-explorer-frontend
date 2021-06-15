@@ -4,4 +4,52 @@
   align-items: center;
   height: 74px;
   padding: 0 70px;
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.header__ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header__line-logout {
+  display: flex;
+}
+
+.header__register-link {
+  display: flex;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: opacity .4s linear;
+  margin-right: 30px;
+  align-self: center;
+}
+
+.header__register-link:hover {
+  opacity: .4;
+}
+
+.header__login-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 76px;
+  height: 32px;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: opacity .4s linear;
+  background-color: #2BE080;
+  border-radius: 3px;
+}
+
+.header__login-link:hover {
+  opacity: .4;
 }
