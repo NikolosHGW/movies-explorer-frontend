@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route exact path='/saved-movies'>
           <SavedMovies />
+        </Route>
+        <Route exact path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </>
