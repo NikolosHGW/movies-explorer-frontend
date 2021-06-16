@@ -53,3 +53,39 @@
 .header__login-link:hover {
   opacity: .4;
 }
+
+.header__menu-button {
+  display: none;
+  background-image: url('../../images/menu.min.svg');
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background-color: rgba(1, 1, 1, 0);
+  transition: opacity .4s linear;
+}
+
+.header__menu-button:hover {
+  opacity: .4;
+}
+
+@media screen and (min-width: 400px) and (max-width: 800px) {
+  .header__menu-button {
+    display: flex;
+  }
+  .header {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .header__menu-button {
+    display: flex;
+    background-image: url('../../images/menuMobile.min.svg');
+    width: 40px;
+    height: 43px;
+  }
+  .header {
+    padding: 0 14px;
+  }
+}

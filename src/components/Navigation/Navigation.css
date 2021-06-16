@@ -43,3 +43,9 @@
   border-radius: 4px;
   background: #F9F9F9 url('../../images/profile.min.svg') no-repeat center;
 }
+
+@media screen and (max-width: 800px) {
+  .navigation {
+    display: none;
+  }
+}

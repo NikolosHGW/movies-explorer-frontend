@@ -29,6 +29,11 @@ export default function Header({ isLogged = true }) {
           </ul>
         </nav>
       )}
+      {isLogged && <button
+        className='header__menu-button'
+        type='button'
+        aria-label='menu'
+      ></button>}
     </header>
   );
 }
