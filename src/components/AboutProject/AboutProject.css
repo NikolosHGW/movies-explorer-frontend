@@ -43,6 +43,9 @@
   display: flex;
   margin-top: 110px;
   height: 36px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .about-project__timing-left {
@@ -69,6 +72,9 @@
   display: flex;
   margin-top: 14px;
   color: #A0A0A0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .about-project__back {
@@ -87,4 +93,104 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__container-heading {
+    margin-bottom: 22px;
+  }
+
+  .about-project__container-part {
+    max-width: 319px;
+  }
+
+  .about-project__container-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__timing {
+    margin-top: 93px;
+  }
+
+  .about-project__timing-left {
+    max-width: 140px;
+  }
+
+  .about-project__timing-right {
+    max-width: 528px;
+  }
+
+  .about-project__back {
+    max-width: 140px;
+  }
+
+  .about-project__front {
+    max-width: 528px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__heading {
+    padding-bottom: 28px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__container-part {
+    margin-top: 60px;
+  }
+
+  .about-project__container-part:last-child {
+    margin-top: 56px;
+  }
+
+  .about-project__container-heading {
+    margin: 0 0 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .about-project__container-text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .about-project__timing {
+    margin-top: 60px;
+    font-size: 11px;
+    line-height: 13px;
+    height: 35px;
+  }
+
+  .about-project__timing-left {
+    max-width: 100px;
+  }
+
+  .about-project__timing-right {
+    max-width: 184px;
+  }
+
+  .about-project__side {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .about-project__back {
+    max-width: 100px;
+  }
+
+  .about-project__front {
+    max-width: 184px;
+  }
 }
