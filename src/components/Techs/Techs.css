@@ -42,6 +42,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  gap: 10px;
 }
 
 .techs__line {
@@ -52,11 +53,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
-}
-
-.techs__line:last-child {
-  margin-right: 0;
 }
 
 @media screen and (max-width: 800px) {
