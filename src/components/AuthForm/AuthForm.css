@@ -91,3 +91,25 @@
 .auth-form__input-error_active {
   visibility: visible;
 }
+
+@media screen and (max-width: 399px) {
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-form__input {
+    width: 260px;
+  }
+
+  .auth-form__heading {
+    margin: 50px 0 80px;
+  }
+
+  .auth-form__submit {
+    margin: 157px 0 14px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

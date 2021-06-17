@@ -22,3 +22,22 @@
 .login__link:hover {
   opacity: .4;
 }
+
+@media screen and (min-width: 399px) and (max-width: 800px) {
+  .login {
+    height: 100vh;
+    justify-content: center;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .login {
+    padding: 56px 0 30px;
+  }
+
+  .login__span {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
