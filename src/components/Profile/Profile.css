@@ -123,3 +123,41 @@
 .profile__exit-button:hover {
   opacity: .4;
 }
+
+@media screen and (max-width: 800px) {
+  .profile__heading {
+    margin: 236px 0 96px;
+  }
+
+  .profile__edit-button {
+    margin: 210px 0 16px;
+  }
+}
+
+@media screen and (min-width: 400px) and (max-width: 420px) {
+  .profile__heading {
+    margin: 70px 0 80px;
+  }
+
+  .profile__label {
+    width: 260px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .profile__heading {
+    margin: 70px 0 80px;
+  }
+
+  .profile__fieldset {
+    min-height: calc(100vh - 253px - 86px);
+  }
+
+  .profile__label {
+    width: 260px;
+  }
+
+  .profile__edit-button {
+    margin: 0;
+  }
+}
