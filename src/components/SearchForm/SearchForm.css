@@ -127,3 +127,41 @@
 .search-form__short:focus + .search-form__pseudo-item_type_checkbox {
   box-shadow: 0 0 5px blue;
 }
+
+@media screen and (max-width: 800px) {
+  .search-form {
+    padding: 86px 30px 61px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .search-form {
+    padding: 98px 14px 50px;
+  }
+
+  .search-form__movie {
+    text-align: left;
+    font-size: 18px;
+    line-height: 22px;
+    color: #A0A0A0;
+    background: none;
+  }
+
+  .search-form__search-button {
+    bottom: 9px;
+    top: unset;
+  }
+
+  .search-form__checkbox {
+    margin-top: 42px;
+  }
+
+  .search-form__pseudo-item {
+    margin-right: 13px;
+  }
+
+  .search-form__short-text {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}
