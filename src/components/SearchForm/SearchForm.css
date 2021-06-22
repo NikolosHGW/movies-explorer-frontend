@@ -1,0 +1,167 @@
+.search-form {
+  padding: 70px 70px 48px;
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form__container {
+  position: relative;
+  border-bottom: 1px solid #E8E8E8;
+  box-sizing: border-box;
+  padding-bottom: 15px;
+}
+
+.search-form__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-form__movie {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  border-radius: 48px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  color: #A0A0A0;
+  background: url('../../images/loop.min.svg') no-repeat 6px center;
+  transition: box-shadow .2s linear;
+}
+
+.search-form__movie:hover {
+  box-shadow: 1px 1px 10px rgba(220,220,220, .8);
+}
+
+.search-form__movie:focus {
+  box-shadow: 1px 1px 10px #3456F3;
+}
+
+.search-form__movie-error {
+  visibility: hidden;
+}
+
+.search-form__movie-error_active {
+  visibility: visible;
+}
+
+.search-form__search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  width: 58.65px;
+  height: 34px;
+  background-color: #3456F3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 48px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  color: white;
+  cursor: pointer;
+  transition: opacity .4s linear;
+}
+
+.search-form__search-button:hover {
+  opacity: .4;
+}
+
+.search-form__checkbox {
+  display: flex;
+  justify-content: center;
+  transition: opacity .4s linear;
+  margin-top: 29px;
+  align-self: center;
+}
+
+.search-form__checkbox:hover {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.search-form__short {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.search-form__pseudo-item {
+  display: flex;
+  width: 36px;
+  height: 20px;
+  border-radius: 20px;
+  margin-right: 12px;
+  background: #2BE080 url('../../images/tumb.min.svg') no-repeat top 6px right 6px;
+}
+
+.search-form__short-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.search-form__short:checked + .search-form__pseudo-item_type_checkbox {
+  background: #A0A0A0 url('../../images/tumb.min.svg') no-repeat top 6px left 6px;
+}
+
+.search-form__short:disabled + .search-form__pseudo-item_type_checkbox {
+  border: 1px solid grey;
+}
+
+.search-form__short:disabled:checked + .search-form__pseudo-item_type_checkbox {
+  background: #2BE080 url('../../images/tumb.min.svg') no-repeat top 6px right 6px;
+}
+
+.search-form__short:focus + .search-form__pseudo-item_type_checkbox {
+  box-shadow: 0 0 5px blue;
+}
+
+@media screen and (max-width: 800px) {
+  .search-form {
+    padding: 86px 30px 61px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .search-form {
+    padding: 98px 14px 50px;
+  }
+
+  .search-form__movie {
+    text-align: left;
+    font-size: 18px;
+    line-height: 22px;
+    color: #A0A0A0;
+    background: none;
+  }
+
+  .search-form__search-button {
+    bottom: 9px;
+    top: unset;
+  }
+
+  .search-form__checkbox {
+    margin-top: 42px;
+  }
+
+  .search-form__pseudo-item {
+    margin-right: 13px;
+  }
+
+  .search-form__short-text {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}
