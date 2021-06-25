@@ -1,24 +1,29 @@
 import './MoviesCard.css';
-import cardImg from '../../images/card.png';
 
-export default function MoviesCard({ buttonSelector }) {
+export default function MoviesCard(props) {
+  const { buttonSelector, nameRU, cardImg, trailerLink, duration } = props
+
   return (
     <article className='movies-card'>
       <a
         className='movies-card__link'
-        href='https://www.youtube.com/watch?v=UXcqcdYABFw'
+        href={trailerLink}
         target='_blank'
         rel="noreferrer"
       >
       </a>
       <div className='movies-card__container'>
         <div className='movies-card__info'>
-          <h2 className='movies-card__heading'>33 слова о дизайне</h2>
-          <span className='movies-card__duration'>1ч 47м</span>
+          <h2 className='movies-card__heading'>{nameRU}</h2>
+          <span className='movies-card__duration'>{duration}</span>
         </div>
         <button className={buttonSelector} type="button" aria-label="like"></button>
       </div>
-      <img className='movies-card__img' src={cardImg} alt='Картинка фильма' />
+      <img
+        className='movies-card__img'
+        src={`https://api.nomoreparties.co${cardImg}`}
+        alt={`Картинка фильма ${nameRU}`}
+      />
     </article>
   );
 }

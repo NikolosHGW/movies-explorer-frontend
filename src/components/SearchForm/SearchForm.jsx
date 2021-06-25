@@ -1,9 +1,28 @@
 import React from 'react';
 import './SearchForm.css';
 
-export default function SearchForm() {
+export default function SearchForm({ fetchMovies, handleSearch }) {
+  const [value, setValue] = React.useState('');
+
+  function handleChange(evt) {
+    setValue(evt.target.value);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!localStorage.getItem('movies')) {
+      fetchMovies(value);
+    } else {
+      handleSearch(value, JSON.parse(localStorage.getItem('movies')));
+    }
+  }
+
   return (
-    <form className='search-form' name='searchForm' noValidate>
+    <form
+      className='search-form'
+      name='searchForm'
+      onSubmit={handleSubmit}
+      noValidate>
       <div className='search-form__container'>
         <label className='search-form__text'>
           <input
@@ -11,6 +30,9 @@ export default function SearchForm() {
             placeholder="Фильм"
             type='text'
             name='movie'
+            value={value}
+            onChange={handleChange}
+            required
           />
         </label>
         <button className='search-form__search-button' type='submit'>Найти</button>
@@ -20,6 +42,7 @@ export default function SearchForm() {
           className='search-form__short'
           type='checkbox'
           name='short'
+          required
         />
         <span className='search-form__pseudo-item search-form__pseudo-item_type_checkbox'></span>
         <span className='search-form__short-text'>Короткометражки</span>
