@@ -10,9 +10,9 @@ export default function SearchForm({ fetchMovies, handleSearch }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    if (!localStorage.getItem('movies')) {
+    if (!localStorage.getItem('movies') && value) {
       fetchMovies(value);
-    } else {
+    } else if (value) {
       handleSearch(value, JSON.parse(localStorage.getItem('movies')));
     }
   }

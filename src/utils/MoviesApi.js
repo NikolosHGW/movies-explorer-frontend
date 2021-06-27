@@ -1,4 +1,4 @@
-import { urlBeatFilmMovies } from "./utils";
+import { urlBeatFilmMovies } from "./constants";
 
 export default function MoviesApi() {
   return fetch(urlBeatFilmMovies)

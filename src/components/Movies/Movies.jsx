@@ -7,24 +7,19 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import React from 'react';
 import MoviesApi from '../../utils/MoviesApi';
-import { findMovies } from '../../utils/utils';
+import { addChunkMovies, getFilteredMovies, splitMovies } from '../../utils/utils';
 
 export default function Movies() {
   const [movies, setMovies] = React.useState([]);
+  const [chunkMovies, setChunkMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    if (localStorage.getItem('movies')) {
-      setMovies(JSON.parse(localStorage.getItem('movies')));
-    }
-  }, []);
 
   const fetchMovies = React.useCallback((textSearch) => {
     setIsLoading(true);
     MoviesApi()
       .then(movies => {
         localStorage.setItem('movies', JSON.stringify(movies));
-        setMovies(findMovies(textSearch, movies));
+        setMovies(getFilteredMovies(textSearch, movies));
         setIsLoading(false);
       })
       .catch(res => {
@@ -34,8 +29,34 @@ export default function Movies() {
   }, []);
 
   const handleSearch = React.useCallback((textSearch, movies) => {
-    setMovies(findMovies(textSearch, movies));
+    setMovies(getFilteredMovies(textSearch, movies));
   }, []);
+
+  const changeChunkMovies = React.useCallback(() => {
+    splitMovies(setChunkMovies, movies);
+  }, [movies]);
+
+  const addMoreMovies = React.useCallback(() => {
+    addChunkMovies(setChunkMovies, movies, chunkMovies);
+  }, [movies, chunkMovies]);
+
+  React.useEffect(() => {
+    if (localStorage.getItem('movies')) {
+      setMovies(JSON.parse(localStorage.getItem('movies')));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    changeChunkMovies();
+  }, [changeChunkMovies]);
+
+  React.useEffect(() => {
+    window.addEventListener('resize', changeChunkMovies);
+
+    return () => {
+      window.addEventListener('resize', changeChunkMovies);
+    }
+  });
 
   return (
     <div className='movies'>
@@ -48,7 +69,9 @@ export default function Movies() {
         {movies.length > 0 &&
           <MoviesCardList
             movies={movies}
+            chunkMovies={chunkMovies}
             buttonSelector='movies-card__like-button'
+            addMoreMovies={addMoreMovies}
           />
         }
         {JSON.parse(localStorage.getItem('movies')) &&
