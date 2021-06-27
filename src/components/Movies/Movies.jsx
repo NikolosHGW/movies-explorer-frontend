@@ -8,8 +8,9 @@ import Preloader from '../Preloader/Preloader';
 import React from 'react';
 import MoviesApi from '../../utils/MoviesApi';
 import { addChunkMovies, getFilteredMovies, splitMovies } from '../../utils/utils';
+import { errorMessage500 } from '../../utils/constants';
 
-export default function Movies() {
+export default function Movies({ handleSetInfoTool }) {
   const [movies, setMovies] = React.useState([]);
   const [chunkMovies, setChunkMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -22,11 +23,11 @@ export default function Movies() {
         setMovies(getFilteredMovies(textSearch, movies));
         setIsLoading(false);
       })
-      .catch(res => {
-        console.log(res);
+      .catch(_res => {
+        handleSetInfoTool(false, errorMessage500);
         setIsLoading(false);
       });
-  }, []);
+  }, [handleSetInfoTool]);
 
   const handleSearch = React.useCallback((textSearch, movies) => {
     setMovies(getFilteredMovies(textSearch, movies));
@@ -65,6 +66,7 @@ export default function Movies() {
         <SearchForm
           fetchMovies={fetchMovies}
           handleSearch={handleSearch}
+          handleSetInfoTool={handleSetInfoTool}
         />
         {movies.length > 0 &&
           <MoviesCardList

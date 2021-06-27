@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css';
 
-export default function SearchForm({ fetchMovies, handleSearch }) {
+export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoTool }) {
   const [value, setValue] = React.useState('');
 
   function handleChange(evt) {
@@ -10,6 +10,9 @@ export default function SearchForm({ fetchMovies, handleSearch }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!value) {
+      handleSetInfoTool(false, 'Нужно ввести ключевое слово');
+    }
     if (!localStorage.getItem('movies') && value) {
       fetchMovies(value);
     } else if (value) {

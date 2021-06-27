@@ -6,8 +6,24 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import React from 'react';
 
 function App() {
+  const [infoToolOpen, setInfoToolOpen] = React.useState({
+    isOpen: false,
+    isSuccess: false,
+    text: '',
+  });
+
+  const handleCloseTool = React.useCallback(() => {
+    setInfoToolOpen(prev => ({ ...prev, isOpen: false, }));
+  }, []);
+
+  const handleSetInfoTool = React.useCallback((isSuccess, text) => {
+    setInfoToolOpen({ isOpen: true, isSuccess, text, });
+  }, []);
+
   return (
     <>
       <Switch>
@@ -15,7 +31,9 @@ function App() {
           <Main />
         </Route>
         <Route path='/movies'>
-          <Movies />
+          <Movies
+            handleSetInfoTool={handleSetInfoTool}
+          />
         </Route>
         <Route path='/saved-movies'>
           <SavedMovies />
@@ -33,6 +51,13 @@ function App() {
           <PageNotFound />
         </Route>
       </Switch>
+
+      <InfoTooltip
+        isOpen={infoToolOpen.isOpen}
+        onClose={handleCloseTool}
+        isSuccess={infoToolOpen.isSuccess}
+        text={infoToolOpen.text}
+      />
     </>
   );
 }
