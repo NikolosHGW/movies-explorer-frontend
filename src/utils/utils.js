@@ -1,7 +1,10 @@
-export function getFilteredMovies(textSearch, moviesArray) {
+export function getFilteredMovies(textSearch, moviesArray, isShort = false) {
   return moviesArray.filter(item => {
-    if (item.nameRU && item.nameEN) {
+    if (item.nameRU && item.nameEN && !isShort) {
       return item.nameRU.toLowerCase().includes(textSearch) || item.nameEN.toLowerCase().includes(textSearch);
+    }
+    if (item.nameRU && item.nameEN && isShort) {
+      return item.duration < 41 && (item.nameRU.toLowerCase().includes(textSearch) || item.nameEN.toLowerCase().includes(textSearch));
     }
     return false;
   });
@@ -37,3 +40,9 @@ export function addChunkMovies(setChunkMovies, movies, chunkMovies) {
   };
   sliceMoviesWithSize(setChunkMovies, movies, endSlice);
 }
+
+export function getTimeFromMins(mins) {
+  let hours = Math.trunc(mins/60);
+  let minutes = mins % 60;
+  return `${hours}ч ${minutes}м`;
+};

@@ -1,3 +1,4 @@
+import { getTimeFromMins } from '../../utils/utils';
 import './MoviesCard.css';
 
 export default function MoviesCard(props) {
@@ -15,7 +16,7 @@ export default function MoviesCard(props) {
       <div className='movies-card__container'>
         <div className='movies-card__info'>
           <h2 className='movies-card__heading'>{nameRU}</h2>
-          <span className='movies-card__duration'>{duration}</span>
+          <span className='movies-card__duration'>{getTimeFromMins(duration)}</span>
         </div>
         <button className={buttonSelector} type="button" aria-label="like"></button>
       </div>

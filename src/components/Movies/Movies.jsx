@@ -15,12 +15,12 @@ export default function Movies({ handleSetInfoTool }) {
   const [chunkMovies, setChunkMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const fetchMovies = React.useCallback((textSearch) => {
+  const fetchMovies = React.useCallback((textSearch, isShort) => {
     setIsLoading(true);
     MoviesApi()
       .then(movies => {
         localStorage.setItem('movies', JSON.stringify(movies));
-        setMovies(getFilteredMovies(textSearch, movies));
+        setMovies(getFilteredMovies(textSearch, movies, isShort));
         setIsLoading(false);
       })
       .catch(_res => {
@@ -29,8 +29,8 @@ export default function Movies({ handleSetInfoTool }) {
       });
   }, [handleSetInfoTool]);
 
-  const handleSearch = React.useCallback((textSearch, movies) => {
-    setMovies(getFilteredMovies(textSearch, movies));
+  const handleSearch = React.useCallback((textSearch, movies, isShort) => {
+    setMovies(getFilteredMovies(textSearch, movies, isShort));
   }, []);
 
   const changeChunkMovies = React.useCallback(() => {

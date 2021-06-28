@@ -3,9 +3,15 @@ import './SearchForm.css';
 
 export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoTool }) {
   const [value, setValue] = React.useState('');
+  const [checked, setChecked] = React.useState(false);
 
-  function handleChange(evt) {
+  function handleChangeValue(evt) {
     setValue(evt.target.value);
+  }
+
+  function handleChangeChecked(evt) {
+    setChecked(evt.target.checked);
+    handleSearch(value, JSON.parse(localStorage.getItem('movies')), evt.target.checked);
   }
 
   function handleSubmit(evt) {
@@ -14,9 +20,9 @@ export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoToo
       handleSetInfoTool(false, 'Нужно ввести ключевое слово');
     }
     if (!localStorage.getItem('movies') && value) {
-      fetchMovies(value);
+      fetchMovies(value, checked);
     } else if (value) {
-      handleSearch(value, JSON.parse(localStorage.getItem('movies')));
+      handleSearch(value, JSON.parse(localStorage.getItem('movies')), checked);
     }
   }
 
@@ -34,7 +40,7 @@ export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoToo
             type='text'
             name='movie'
             value={value}
-            onChange={handleChange}
+            onChange={handleChangeValue}
             required
           />
         </label>
@@ -45,6 +51,8 @@ export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoToo
           className='search-form__short'
           type='checkbox'
           name='short'
+          defaultChecked={checked}
+          onChange={handleChangeChecked}
           required
         />
         <span className='search-form__pseudo-item search-form__pseudo-item_type_checkbox'></span>
