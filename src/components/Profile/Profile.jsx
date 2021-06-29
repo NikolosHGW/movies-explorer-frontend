@@ -2,7 +2,7 @@ import './Profile.css';
 import Header from '../Header/Header';
 import React from 'react';
 
-export default function Profile() {
+export default function Profile({ onLogout }) {
   const [inputsValues, setInputsValues] = React.useState({
     name: 'Аккаунт',
     email: 'acc@yandex.ru',
@@ -71,7 +71,11 @@ export default function Profile() {
           Редактировать
         </button>
       </form>
-      <button className='profile__exit-button' type='button'>Выйти из аккаунта</button>
+      <button
+        className='profile__exit-button'
+        type='button'
+        onClick={() => onLogout()}
+      >Выйти из аккаунта</button>
     </div>
   );
 }

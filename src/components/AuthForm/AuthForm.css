@@ -39,6 +39,17 @@
   opacity: .4;
 }
 
+.auth-form__submit_inactive {
+  background-color: rgba(0, 0, 0, 0);
+  color: #C4C4C4;
+  cursor: default;
+  border: 1px solid #C4C4C4;
+}
+
+.auth-form__submit_inactive:hover {
+  opacity: 1;
+}
+
 .auth-form__label {
   display: flex;
   flex-direction: column;

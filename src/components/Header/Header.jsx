@@ -4,7 +4,7 @@ import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function Header({ isLogged = true }) {
+export default function Header() {
   const [isVisible, setIsVisible] = React.useState(false);
 
   function changeVisible() {
@@ -14,7 +14,7 @@ export default function Header({ isLogged = true }) {
   return (
     <header className='header'>
       <Logo />
-      {isLogged ? (<Navigation isVisible={isVisible} />) : (
+      {localStorage.getItem('id') ? (<Navigation isVisible={isVisible} />) : (
         <nav className='header__nav'>
           <ul className='header__ul'>
             <li className='header__line-logout'>
@@ -36,7 +36,7 @@ export default function Header({ isLogged = true }) {
           </ul>
         </nav>
       )}
-      {isLogged && <button
+      {localStorage.getItem('id') && <button
         className={`header__menu-button${isVisible ? ' header__menu-button_close' : ''}`}
         type='button'
         aria-label={`${isVisible ? 'close menu' : 'open menu'}`}
