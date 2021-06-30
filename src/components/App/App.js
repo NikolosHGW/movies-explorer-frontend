@@ -12,11 +12,13 @@ import React from 'react';
 import { authorize, logout, register } from '../../utils/auth';
 import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { editInfoUser, getInfoUser } from '../../utils/MainApi';
+import { addMovie, deleteMovie, editInfoUser, getInfoUser, getMovies } from '../../utils/MainApi';
+import { errorMessage500 } from '../../utils/constants';
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const [infoToolOpen, setInfoToolOpen] = React.useState({
     isOpen: false,
     isSuccess: false,
@@ -94,11 +96,38 @@ function App() {
       .catch(openInfoToolWithError);
   }, [openInfoToolWithError]);
 
+  const saveMovie = React.useCallback((objMovie) => {
+    addMovie(objMovie)
+      .then(movie => {
+        setSavedMovies(prev => [movie, ...prev]);
+      })
+      .catch(openInfoToolWithError)
+  }, [openInfoToolWithError]);
+
+  const removeMovie = React.useCallback((objMovie) => {
+    deleteMovie(objMovie._id)
+      .then(() => {
+        setSavedMovies(prev => prev
+          .filter(m => m.movieId !== objMovie.movieId));
+      })
+      .catch(openInfoToolWithError)
+  }, [openInfoToolWithError]);
+
   React.useEffect(() => {
     if(localStorage.getItem('id')) {
       setUserInfo();
     }
   }, [setUserInfo, userId]);
+
+  React.useEffect(() => {
+    if(isLogged) {
+      getMovies()
+      .then(savedMovies => setSavedMovies(savedMovies.filter(movie => {
+        return movie.owner === userId;
+      })))
+      .catch(() => openInfoToolWithError(errorMessage500));
+    }
+  }, [openInfoToolWithError, userId, isLogged]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -110,10 +139,16 @@ function App() {
           path='/movies'
           component={Movies}
           handleSetInfoTool={handleSetInfoTool}
+          saveMovie={saveMovie}
+          removeMovie={removeMovie}
+          savedMovies={savedMovies}
         />
         <ProtectedRoute
           path='/saved-movies'
           component={SavedMovies}
+          savedMovies={savedMovies}
+          handleSetInfoTool={handleSetInfoTool}
+          removeMovie={removeMovie}
         />
         <ProtectedRoute
           path='/profile'

@@ -5,12 +5,13 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import MoviesCard from '../MoviesCard/MoviesCard';
 import React from 'react';
 import MoviesApi from '../../utils/MoviesApi';
-import { addChunkMovies, getFilteredMovies, splitMovies } from '../../utils/utils';
+import { addChunkMovies, getFilteredMovies, getMap, splitMovies } from '../../utils/utils';
 import { errorMessage500 } from '../../utils/constants';
 
-export default function Movies({ handleSetInfoTool }) {
+export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, savedMovies }) {
   const [movies, setMovies] = React.useState([]);
   const [chunkMovies, setChunkMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -34,12 +35,47 @@ export default function Movies({ handleSetInfoTool }) {
   }, []);
 
   const changeChunkMovies = React.useCallback(() => {
-    splitMovies(setChunkMovies, movies);
+    setTimeout(() => {
+      splitMovies(setChunkMovies, movies);
+    }, 1000);
   }, [movies]);
 
   const addMoreMovies = React.useCallback(() => {
     addChunkMovies(setChunkMovies, movies, chunkMovies);
   }, [movies, chunkMovies]);
+
+  const searchLogic = React.useCallback((value, checked) => {
+    if (!localStorage.getItem('movies') && value) {
+      fetchMovies(value, checked);
+    } else if (value) {
+      handleSearch(value, JSON.parse(localStorage.getItem('movies')), checked);
+    }
+  }, [fetchMovies, handleSearch]);
+
+  const handleChangeLike = React.useCallback((buttonSelector, objMovie) => {
+    if (buttonSelector === 'movies-card__like-button movies-card__like-button_active') {
+      removeMovie(getMap(savedMovies).get(objMovie.id));
+    }
+    if (buttonSelector === 'movies-card__like-button') {
+      saveMovie(objMovie);
+    }
+  }, [saveMovie, removeMovie, savedMovies]);
+
+  const cards = React.useMemo(() => {
+    const moviesMap = getMap(savedMovies);
+    return chunkMovies.map(movie => (
+      <MoviesCard
+        buttonSelector={moviesMap.get(movie.id)?.movieId === movie.id ? 'movies-card__like-button movies-card__like-button_active' : 'movies-card__like-button'}
+        key={movie.id}
+        nameRU={movie.nameRU}
+        cardImg={movie.image.url}
+        trailerLink={movie.trailerLink}
+        duration={movie.duration}
+        objMovie={movie}
+        handleChangeLike={handleChangeLike}
+      />
+    ));
+  }, [chunkMovies, handleChangeLike, savedMovies]);
 
   React.useEffect(() => {
     if (localStorage.getItem('movies')) {
@@ -64,16 +100,16 @@ export default function Movies({ handleSetInfoTool }) {
       <Header />
       <Content>
         <SearchForm
-          fetchMovies={fetchMovies}
+          searchLogic={searchLogic}
           handleSearch={handleSearch}
           handleSetInfoTool={handleSetInfoTool}
+          moviesArrayForFilter={JSON.parse(localStorage.getItem('movies'))}
         />
         {movies.length > 0 &&
           <MoviesCardList
             movies={movies}
-            chunkMovies={chunkMovies}
-            buttonSelector='movies-card__like-button'
             addMoreMovies={addMoreMovies}
+            cards={cards}
           />
         }
         {JSON.parse(localStorage.getItem('movies')) &&

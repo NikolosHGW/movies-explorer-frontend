@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css';
 
-export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoTool }) {
+export default function SearchForm({ searchLogic, handleSearch, handleSetInfoTool, moviesArrayForFilter }) {
   const [value, setValue] = React.useState('');
   const [checked, setChecked] = React.useState(false);
 
@@ -11,7 +11,7 @@ export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoToo
 
   function handleChangeChecked(evt) {
     setChecked(evt.target.checked);
-    handleSearch(value, JSON.parse(localStorage.getItem('movies')), evt.target.checked);
+    handleSearch(value, moviesArrayForFilter, evt.target.checked);
   }
 
   function handleSubmit(evt) {
@@ -19,11 +19,7 @@ export default function SearchForm({ fetchMovies, handleSearch, handleSetInfoToo
     if (!value) {
       handleSetInfoTool(false, 'Нужно ввести ключевое слово');
     }
-    if (!localStorage.getItem('movies') && value) {
-      fetchMovies(value, checked);
-    } else if (value) {
-      handleSearch(value, JSON.parse(localStorage.getItem('movies')), checked);
-    }
+    searchLogic(value, checked);
   }
 
   return (

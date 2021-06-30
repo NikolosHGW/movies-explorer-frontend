@@ -6,7 +6,6 @@ function checkResponse(res) {
   if(res.ok) {
     return res.json();
   }
-  console.log(res);
   return res.json().then(res => {
     throw new Error(res.message)
   });
@@ -31,33 +30,38 @@ export function editInfoUser(name, email) {
     .then(checkResponse);
 }
 
-// function getPromise(endPoint, bodyObj) {
-//   return fetch(`${BASE_URL}${endPoint}`, {
-//     method: 'POST',
-//     ...options,
-//     body: JSON.stringify(bodyObj),
-//   })
-//     .then(checkResponse);
-// }
+export function getMovies() {
+  return fetch(`${BASE_URL}/movies`, {
+    ...options,
+  })
+    .then(checkResponse);
+}
 
-// export function register(name, email, password) {
-//   const bodyObj = {
-//     name, email, password,
-//   }
-//   return getPromise('/signup', bodyObj);
-// }
+export function addMovie(bodyObj) {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'POST',
+    ...options,
+    body: JSON.stringify({
+      country: bodyObj.country,
+      director: bodyObj.director,
+      duration: bodyObj.duration,
+      year: bodyObj.year,
+      description: bodyObj.description,
+      image: `https://api.nomoreparties.co${bodyObj.image.url}`,
+      trailer: bodyObj.trailerLink,
+      thumbnail: `https://api.nomoreparties.co${bodyObj.image.formats.thumbnail.url}`,
+      movieId: bodyObj.id,
+      nameRU: bodyObj.nameRU,
+      nameEN: bodyObj.nameEN,
+    }),
+  })
+    .then(checkResponse);
+}
 
-// export function authorize(email, password) {
-//   const bodyObj = {
-//     email, password,
-//   }
-//   return getPromise('/signin', bodyObj);
-// }
-
-// export function logout() {
-//   return fetch(`${BASE_URL}/logout`, {
-//     method: 'POST',
-//     ...options,
-//   })
-//     .then(checkResponse);
-// }
+export function deleteMovie(id) {
+  return fetch(`${BASE_URL}/movies/${id}`, {
+    method: 'DELETE',
+    ...options,
+  })
+    .then(checkResponse);
+}

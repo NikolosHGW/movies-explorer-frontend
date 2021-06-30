@@ -46,3 +46,11 @@ export function getTimeFromMins(mins) {
   let minutes = mins % 60;
   return `${hours}ч ${minutes}м`;
 };
+
+export function getMap(moviesArray) {
+  const map = new Map();
+  moviesArray.forEach(movie => {
+    map.set(movie.movieId, movie);
+  });
+  return map;
+}
