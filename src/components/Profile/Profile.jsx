@@ -1,13 +1,15 @@
 import './Profile.css';
 import Header from '../Header/Header';
 import React from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export default function Profile({ onLogout }) {
+export default function Profile({ onLogout, handleEditProfile }) {
+  const currentUser = React.useContext(CurrentUserContext);
   const [inputsValues, setInputsValues] = React.useState({
-    name: 'Аккаунт',
-    email: 'acc@yandex.ru',
-    nameValid: true,
-    emailValid: true,
+    name: '',
+    email: '',
+    nameValid: false,
+    emailValid: false,
     nameValidMessage: '',
     emailValidMessage: '',
   });
@@ -16,16 +18,31 @@ export default function Profile({ onLogout }) {
     setInputsValues({
       ...inputsValues,
       [evt.target.name]: evt.target.value,
-      [`${evt.target.name}Valid`]: evt.target.validity.valid,
+      nameValid: evt.target.value === currentUser.name ? false : evt.target.validity.valid,
+      emailValid: evt.target.value === currentUser.email ? false : evt.target.validity.valid,
       [`${evt.target.name}ValidMessage`]: evt.target.validationMessage,
     });
   }
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    const { name, email } = inputsValues;
+    handleEditProfile(name, email);
+  }
+
+  React.useEffect(() => {
+    setInputsValues(prev => currentUser.name ? ({
+      ...prev,
+      name: currentUser.name,
+      email: currentUser.email,
+    }) : prev);
+  }, [currentUser]);
+
   return (
     <div className='profile'>
       <Header />
-      <h2 className='profile__heading'>{`Привет, ${inputsValues.name}!`}</h2>
-      <form className='profile__form' noValidate>
+      <h2 className='profile__heading'>{`Привет, ${currentUser.name}!`}</h2>
+      <form className='profile__form' onSubmit={handleSubmit} noValidate>
         <fieldset className='profile__fieldset'>
           <label className='profile__label profile__label_border'>Имя
             <input
@@ -65,8 +82,9 @@ export default function Profile({ onLogout }) {
           </label>
         </fieldset>
         <button
-          className='profile__edit-button'
+          className={`profile__edit-button${inputsValues.nameValid && inputsValues.emailValid ? '' : ' profile__edit-button_inactive'}`}
           type='submit'
+          disabled={!(inputsValues.nameValid && inputsValues.emailValid)}
         >
           Редактировать
         </button>

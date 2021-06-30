@@ -106,9 +106,19 @@
   opacity: .4;
 }
 
+.profile__edit-button_inactive {
+  background-color: rgba(0, 0, 0, 0);
+  color: #C4C4C4;
+  cursor: default;
+}
+
+.profile__edit-button_inactive:hover {
+  opacity: 1;
+}
+
 .profile__exit-button {
   padding: 0;
-  margin: 0;
+  margin: 0 0 30px;
   border: 0;
   color: #FF3055;
   background-color: rgba(0, 0, 0, 0);
