@@ -91,7 +91,7 @@ export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, save
     window.addEventListener('resize', changeChunkMovies);
 
     return () => {
-      window.addEventListener('resize', changeChunkMovies);
+      window.removeEventListener('resize', changeChunkMovies);
     }
   });
 
