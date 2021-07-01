@@ -1,7 +1,12 @@
 import './AuthForm.css';
 import Logo from '../Logo/Logo';
+import React from 'react';
 
 export default function AuthForm({ children, buttonText, greeting, isValid, onSubmit }) {
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  React.useEffect(() => setIsLoading(false), []);
+
   return (
     <form
       className='auth-form'
@@ -17,7 +22,10 @@ export default function AuthForm({ children, buttonText, greeting, isValid, onSu
         className={`auth-form__submit${isValid ? '' : ' auth-form__submit_inactive'}`}
         type='submit'
         disabled={!isValid}
-      >{buttonText}</button>
+        onClick={() => setIsLoading(true)}
+      >
+        {isLoading ? (<div className="auth-form__spinner"></div>) : buttonText}
+      </button>
     </form>
   );
 }

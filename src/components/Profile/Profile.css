@@ -134,6 +134,21 @@
   opacity: .4;
 }
 
+.profile__spinner {
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: green;
+  animation: spin 1s linear infinite;
+  text-align: center;
+  margin: auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @media screen and (max-width: 800px) {
   .profile__heading {
     margin: 236px 0 96px;

@@ -5,6 +5,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 export default function Profile({ onLogout, handleEditProfile }) {
   const currentUser = React.useContext(CurrentUserContext);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [inputsValues, setInputsValues] = React.useState({
     name: '',
     email: '',
@@ -35,6 +36,19 @@ export default function Profile({ onLogout, handleEditProfile }) {
       ...prev,
       name: currentUser.name,
       email: currentUser.email,
+    }) : prev);
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    setIsLoading(false);
+    setInputsValues(prev => currentUser.name ? ({
+      ...prev,
+      name: currentUser.name,
+      email: currentUser.email,
+      nameValid: false,
+      emailValid: false,
+      nameValidMessage: '',
+      emailValidMessage: '',
     }) : prev);
   }, [currentUser]);
 
@@ -85,15 +99,18 @@ export default function Profile({ onLogout, handleEditProfile }) {
           className={`profile__edit-button${inputsValues.nameValid && inputsValues.emailValid ? '' : ' profile__edit-button_inactive'}`}
           type='submit'
           disabled={!(inputsValues.nameValid && inputsValues.emailValid)}
+          onClick={() => setIsLoading(true)}
         >
-          Редактировать
+          {isLoading ? (<div className="profile__spinner"></div>) : 'Редактировать'}
         </button>
       </form>
       <button
         className='profile__exit-button'
         type='button'
         onClick={() => onLogout()}
-      >Выйти из аккаунта</button>
+      >
+        {isLoading ? (<div className="profile__spinner"></div>) : 'Выйти из аккаунта'}
+      </button>
     </div>
   );
 }
