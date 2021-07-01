@@ -1,10 +1,11 @@
 export function getFilteredMovies(textSearch, moviesArray, isShort = false) {
+  const target = textSearch.toLowerCase();
   return moviesArray.filter(item => {
     if (item.nameRU && item.nameEN && !isShort) {
-      return item.nameRU.toLowerCase().includes(textSearch) || item.nameEN.toLowerCase().includes(textSearch);
+      return item.nameRU.toLowerCase().includes(target) || item.nameEN.toLowerCase().includes(target);
     }
     if (item.nameRU && item.nameEN && isShort) {
-      return item.duration < 41 && (item.nameRU.toLowerCase().includes(textSearch) || item.nameEN.toLowerCase().includes(textSearch));
+      return item.duration < 41 && (item.nameRU.toLowerCase().includes(target) || item.nameEN.toLowerCase().includes(target));
     }
     return false;
   });
