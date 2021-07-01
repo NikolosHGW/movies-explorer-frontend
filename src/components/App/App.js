@@ -19,6 +19,7 @@ function App() {
   const [isLogged, setIsLogged] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [prevSearchedMovies, setPrevSearchedMovies] = React.useState([]);
   const [infoToolOpen, setInfoToolOpen] = React.useState({
     isOpen: false,
     isSuccess: false,
@@ -138,6 +139,13 @@ function App() {
     }
   }, [openInfoToolWithError, userId, isLogged, handleLogout]);
 
+  React.useEffect(() => {
+    const prevResult = localStorage.getItem('previouslySearchResultMovies');
+    if(prevResult) {
+      setPrevSearchedMovies(JSON.parse(prevResult));
+    }
+  }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
@@ -151,6 +159,8 @@ function App() {
           saveMovie={saveMovie}
           removeMovie={removeMovie}
           savedMovies={savedMovies}
+          prevSearchedMovies={prevSearchedMovies}
+          setPrevSearchedMovies={setPrevSearchedMovies}
         />
         <ProtectedRoute
           path='/saved-movies'

@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css';
 
-export default function SearchForm({ searchLogic, handleSearch, handleSetInfoTool, moviesArrayForFilter }) {
+export default function SearchForm({ searchLogic, handleSearch, handleSetInfoTool, moviesArrayForFilter, parentComponent }) {
   const [value, setValue] = React.useState('');
   const [checked, setChecked] = React.useState(false);
 
@@ -21,6 +21,13 @@ export default function SearchForm({ searchLogic, handleSearch, handleSetInfoToo
     }
     searchLogic(value, checked);
   }
+
+  React.useEffect(() => {
+    const prevTextSearch = localStorage.getItem('prevTextSearch');
+    if (prevTextSearch && parentComponent === 'Movies') {
+      setValue(prevTextSearch);
+    }
+  }, [parentComponent]);
 
   return (
     <form

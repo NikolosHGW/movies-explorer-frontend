@@ -11,7 +11,7 @@ import MoviesApi from '../../utils/MoviesApi';
 import { addChunkMovies, getFilteredMovies, getMap, splitMovies } from '../../utils/utils';
 import { errorMessage500 } from '../../utils/constants';
 
-export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, savedMovies }) {
+export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, savedMovies, prevSearchedMovies, setPrevSearchedMovies }) {
   const [movies, setMovies] = React.useState([]);
   const [chunkMovies, setChunkMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -21,18 +21,26 @@ export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, save
     MoviesApi()
       .then(movies => {
         localStorage.setItem('movies', JSON.stringify(movies));
-        setMovies(getFilteredMovies(textSearch, movies, isShort));
+        const filteredMovies = getFilteredMovies(textSearch, movies, isShort);
+        setMovies(filteredMovies);
+        localStorage.setItem('previouslySearchResultMovies', JSON.stringify(filteredMovies));
+        localStorage.setItem('prevTextSearch', textSearch);
+        setPrevSearchedMovies(JSON.parse(localStorage.getItem('previouslySearchResultMovies')));
         setIsLoading(false);
       })
       .catch(_res => {
         handleSetInfoTool(false, errorMessage500);
         setIsLoading(false);
       });
-  }, [handleSetInfoTool]);
+  }, [handleSetInfoTool, setPrevSearchedMovies]);
 
   const handleSearch = React.useCallback((textSearch, movies, isShort) => {
-    setMovies(getFilteredMovies(textSearch, movies, isShort));
-  }, []);
+    const filteredMovies = getFilteredMovies(textSearch, movies, isShort);
+    setMovies(filteredMovies);
+    localStorage.setItem('previouslySearchResultMovies', JSON.stringify(filteredMovies));
+    localStorage.setItem('prevTextSearch', textSearch);
+    setPrevSearchedMovies(JSON.parse(localStorage.getItem('previouslySearchResultMovies')));
+  }, [setPrevSearchedMovies]);
 
   const changeChunkMovies = React.useCallback(() => {
     splitMovies(setChunkMovies, movies);
@@ -77,9 +85,9 @@ export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, save
 
   React.useEffect(() => {
     if (localStorage.getItem('movies')) {
-      setMovies(JSON.parse(localStorage.getItem('movies')));
+      setMovies(prevSearchedMovies);
     }
-  }, []);
+  }, [prevSearchedMovies]);
 
   React.useEffect(() => {
     changeChunkMovies();
@@ -102,6 +110,7 @@ export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, save
           handleSearch={handleSearch}
           handleSetInfoTool={handleSetInfoTool}
           moviesArrayForFilter={JSON.parse(localStorage.getItem('movies'))}
+          parentComponent='Movies'
         />
         {movies.length > 0 &&
           <MoviesCardList
