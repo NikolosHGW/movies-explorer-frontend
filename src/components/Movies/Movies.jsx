@@ -35,9 +35,7 @@ export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, save
   }, []);
 
   const changeChunkMovies = React.useCallback(() => {
-    setTimeout(() => {
-      splitMovies(setChunkMovies, movies);
-    }, 1000);
+    splitMovies(setChunkMovies, movies);
   }, [movies]);
 
   const addMoreMovies = React.useCallback(() => {
