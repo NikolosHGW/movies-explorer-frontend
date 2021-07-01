@@ -25,10 +25,10 @@ export default function Register({ onRegister }) {
     });
   }
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt, setIsLoading) {
     evt.preventDefault();
     const {name, email, password} = inputsValues;
-    onRegister(name, email, password);
+    onRegister(name, email, password, setIsLoading);
   }
 
   return (

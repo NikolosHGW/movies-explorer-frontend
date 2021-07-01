@@ -6,7 +6,6 @@ function checkResponse(res) {
   if(res.ok) {
     return res.json();
   }
-  console.log(res);
   return res.json().then(res => {
     throw new Error(res.message)
   });

@@ -22,10 +22,10 @@ export default function Login({ onLogin }) {
     });
   }
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt, setIsLoading) {
     evt.preventDefault();
     const {email, password} = inputsValues;
-    onLogin(email, password);
+    onLogin(email, password, setIsLoading);
   }
 
   return (

@@ -44,7 +44,7 @@ function App() {
     });
   }, []);
 
-  const handleLogin = React.useCallback((email, password) => {
+  const handleLogin = React.useCallback((email, password, setIsLoading) => {
     authorize(email, password)
       .then(res => {
         if(res._id) {
@@ -53,15 +53,21 @@ function App() {
           history.push('/movies');
         }
       })
-      .catch(openInfoToolWithError);
+      .catch(err => {
+        openInfoToolWithError(err);
+        setIsLoading(false);
+      });
   }, [history, openInfoToolWithError]);
 
-  const handleRegister = React.useCallback((name, email, password) => {
+  const handleRegister = React.useCallback((name, email, password, setIsLoading) => {
     register(name, email, password)
       .then(() => {
         handleLogin(email, password);
       })
-      .catch(openInfoToolWithError);
+      .catch(err => {
+        openInfoToolWithError(err);
+        setIsLoading(false);
+      });
   }, [handleLogin, openInfoToolWithError]);
 
   const handleLogout = React.useCallback(() => {
@@ -101,7 +107,7 @@ function App() {
       .then(movie => {
         setSavedMovies(prev => [movie, ...prev]);
       })
-      .catch(openInfoToolWithError)
+      .catch(openInfoToolWithError);
   }, [openInfoToolWithError]);
 
   const removeMovie = React.useCallback((objMovie) => {
@@ -110,7 +116,7 @@ function App() {
         setSavedMovies(prev => prev
           .filter(m => m.movieId !== objMovie.movieId));
       })
-      .catch(openInfoToolWithError)
+      .catch(openInfoToolWithError);
   }, [openInfoToolWithError]);
 
   React.useEffect(() => {
@@ -125,9 +131,12 @@ function App() {
       .then(savedMovies => setSavedMovies(savedMovies.filter(movie => {
         return movie.owner === userId;
       })))
-      .catch(() => openInfoToolWithError(errorMessage500));
+      .catch(() => {
+        openInfoToolWithError({ message: errorMessage500 });
+        handleLogout();
+      });
     }
-  }, [openInfoToolWithError, userId, isLogged]);
+  }, [openInfoToolWithError, userId, isLogged, handleLogout]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -154,7 +163,6 @@ function App() {
           path='/profile'
           component={Profile}
           onLogout={handleLogout}
-          isLogged={isLogged}
           handleEditProfile={handleEditProfile}
         />
         <Route path='/signup'>

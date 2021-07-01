@@ -5,12 +5,14 @@ import React from 'react';
 export default function AuthForm({ children, buttonText, greeting, isValid, onSubmit }) {
   const [isLoading, setIsLoading] = React.useState(false);
 
-  React.useEffect(() => setIsLoading(false), []);
+  function handleSubmit(evt) {
+    onSubmit(evt, setIsLoading);
+  }
 
   return (
     <form
       className='auth-form'
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       noValidate
     >
       <Logo />
