@@ -129,6 +129,10 @@
     width: 260px;
   }
 
+  .auth-form__input-error {
+    max-width: 260px;
+  }
+
   .auth-form__heading {
     margin: 50px 0 80px;
   }
