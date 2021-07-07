@@ -103,7 +103,7 @@
   height: 20px;
   border-radius: 20px;
   margin-right: 12px;
-  background: #2BE080 url('../../images/tumb.min.svg') no-repeat top 6px right 6px;
+  background: #A0A0A0 url('../../images/tumb.min.svg') no-repeat top 6px left 6px;
 }
 
 .search-form__short-text {
@@ -113,7 +113,7 @@
 }
 
 .search-form__short:checked + .search-form__pseudo-item_type_checkbox {
-  background: #A0A0A0 url('../../images/tumb.min.svg') no-repeat top 6px left 6px;
+  background: #2BE080 url('../../images/tumb.min.svg') no-repeat top 6px right 6px;
 }
 
 .search-form__short:disabled + .search-form__pseudo-item_type_checkbox {

@@ -3,14 +3,14 @@ import AuthForm from '../AuthForm/AuthForm';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Register() {
+export default function Register({ onRegister }) {
   const [inputsValues, setInputsValues] = React.useState({
     name: '',
     email: '',
     password: '',
-    nameValid: true,
-    emailValid: true,
-    passwordValid: true,
+    nameValid: false,
+    emailValid: false,
+    passwordValid: false,
     nameValidMessage: '',
     emailValidMessage: '',
     passwordValidMessage: '',
@@ -25,9 +25,20 @@ export default function Register() {
     });
   }
 
+  function handleSubmit(evt, setIsLoading) {
+    evt.preventDefault();
+    const {name, email, password} = inputsValues;
+    onRegister(name, email, password, setIsLoading);
+  }
+
   return (
     <div className='register'>
-      <AuthForm buttonText='Зарегистрироваться' greeting='Добро пожаловать!'>
+      <AuthForm
+        buttonText='Зарегистрироваться'
+        greeting='Добро пожаловать!'
+        isValid={inputsValues.nameValid && inputsValues.emailValid && inputsValues.passwordValid}
+        onSubmit={handleSubmit}
+      >
         <label className='auth-form__label'>
           <span>Имя</span>
           <input

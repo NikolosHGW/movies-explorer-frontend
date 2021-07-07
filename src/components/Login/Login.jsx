@@ -3,12 +3,12 @@ import AuthForm from '../AuthForm/AuthForm';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const [inputsValues, setInputsValues] = React.useState({
     email: '',
     password: '',
-    emailValid: true,
-    passwordValid: true,
+    emailValid: false,
+    passwordValid: false,
     emailValidMessage: '',
     passwordValidMessage: '',
   });
@@ -22,9 +22,20 @@ export default function Login() {
     });
   }
 
+  function handleSubmit(evt, setIsLoading) {
+    evt.preventDefault();
+    const {email, password} = inputsValues;
+    onLogin(email, password, setIsLoading);
+  }
+
   return (
     <div className='login'>
-      <AuthForm buttonText='Войти' greeting='Рады видеть!'>
+      <AuthForm
+        buttonText='Войти'
+        greeting='Рады видеть!'
+        isValid={inputsValues.emailValid && inputsValues.passwordValid}
+        onSubmit={handleSubmit}
+      >
         <label className='auth-form__label'>
           <span>E-mail</span>
           <input

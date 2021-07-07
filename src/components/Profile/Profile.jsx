@@ -1,13 +1,16 @@
 import './Profile.css';
 import Header from '../Header/Header';
 import React from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export default function Profile() {
+export default function Profile({ onLogout, handleEditProfile }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [inputsValues, setInputsValues] = React.useState({
-    name: 'Аккаунт',
-    email: 'acc@yandex.ru',
-    nameValid: true,
-    emailValid: true,
+    name: '',
+    email: '',
+    nameValid: false,
+    emailValid: false,
     nameValidMessage: '',
     emailValidMessage: '',
   });
@@ -16,16 +19,44 @@ export default function Profile() {
     setInputsValues({
       ...inputsValues,
       [evt.target.name]: evt.target.value,
-      [`${evt.target.name}Valid`]: evt.target.validity.valid,
+      nameValid: evt.target.value === currentUser.name ? false : evt.target.validity.valid,
+      emailValid: evt.target.value === currentUser.email ? false : evt.target.validity.valid,
       [`${evt.target.name}ValidMessage`]: evt.target.validationMessage,
     });
   }
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    const { name, email } = inputsValues;
+    handleEditProfile(name, email);
+  }
+
+  React.useEffect(() => {
+    setInputsValues(prev => currentUser.name ? ({
+      ...prev,
+      name: currentUser.name,
+      email: currentUser.email,
+    }) : prev);
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    setIsLoading(false);
+    setInputsValues(prev => currentUser.name ? ({
+      ...prev,
+      name: currentUser.name,
+      email: currentUser.email,
+      nameValid: false,
+      emailValid: false,
+      nameValidMessage: '',
+      emailValidMessage: '',
+    }) : prev);
+  }, [currentUser]);
+
   return (
     <div className='profile'>
       <Header />
-      <h2 className='profile__heading'>{`Привет, ${inputsValues.name}!`}</h2>
-      <form className='profile__form' noValidate>
+      <h2 className='profile__heading'>{`Привет, ${currentUser.name}!`}</h2>
+      <form className='profile__form' onSubmit={handleSubmit} noValidate>
         <fieldset className='profile__fieldset'>
           <label className='profile__label profile__label_border'>Имя
             <input
@@ -65,13 +96,21 @@ export default function Profile() {
           </label>
         </fieldset>
         <button
-          className='profile__edit-button'
+          className={`profile__edit-button${inputsValues.nameValid && inputsValues.emailValid ? '' : ' profile__edit-button_inactive'}`}
           type='submit'
+          disabled={!(inputsValues.nameValid && inputsValues.emailValid)}
+          onClick={() => setIsLoading(true)}
         >
-          Редактировать
+          {isLoading ? (<div className="profile__spinner"></div>) : 'Редактировать'}
         </button>
       </form>
-      <button className='profile__exit-button' type='button'>Выйти из аккаунта</button>
+      <button
+        className='profile__exit-button'
+        type='button'
+        onClick={() => onLogout()}
+      >
+        {isLoading ? (<div className="profile__spinner"></div>) : 'Выйти из аккаунта'}
+      </button>
     </div>
   );
 }

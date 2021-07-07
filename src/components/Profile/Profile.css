@@ -106,9 +106,19 @@
   opacity: .4;
 }
 
+.profile__edit-button_inactive {
+  background-color: rgba(0, 0, 0, 0);
+  color: #C4C4C4;
+  cursor: default;
+}
+
+.profile__edit-button_inactive:hover {
+  opacity: 1;
+}
+
 .profile__exit-button {
   padding: 0;
-  margin: 0;
+  margin: 0 0 30px;
   border: 0;
   color: #FF3055;
   background-color: rgba(0, 0, 0, 0);
@@ -122,6 +132,21 @@
 
 .profile__exit-button:hover {
   opacity: .4;
+}
+
+.profile__spinner {
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: green;
+  animation: spin 1s linear infinite;
+  text-align: center;
+  margin: auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 @media screen and (max-width: 800px) {

@@ -9,7 +9,10 @@
   display: grid;
   justify-content: center;
   gap: 30px 24px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, min-content));
+  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  max-width: 1140px;
+  width: 100%;
+  align-self: center;
 }
 
 .movies-card-list__more-button {

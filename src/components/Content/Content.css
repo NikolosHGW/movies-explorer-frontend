@@ -3,3 +3,12 @@
   flex-direction: column;
   min-height: calc(100vh - 172px - 74px);
 }
+
+.content__not-found {
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  margin: auto;
+}
+
+.content__preloader {
+  margin: auto;
+}
