@@ -1,6 +1,4 @@
-import { options } from "./constants";
-
-const BASE_URL = 'https://api.mymovies.nomoredomains.icu';
+import { options, PROD_URL } from "./constants";
 
 function checkResponse(res) {
   if(res.ok) {
@@ -12,14 +10,14 @@ function checkResponse(res) {
 }
 
 export function getInfoUser() {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${PROD_URL}/users/me`, {
     ...options,
   })
     .then(checkResponse);
 }
 
 export function editInfoUser(name, email) {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${PROD_URL}/users/me`, {
     method: 'PATCH',
     ...options,
     body: JSON.stringify({
@@ -31,14 +29,14 @@ export function editInfoUser(name, email) {
 }
 
 export function getMovies() {
-  return fetch(`${BASE_URL}/movies`, {
+  return fetch(`${PROD_URL}/movies`, {
     ...options,
   })
     .then(checkResponse);
 }
 
 export function addMovie(bodyObj) {
-  return fetch(`${BASE_URL}/movies`, {
+  return fetch(`${PROD_URL}/movies`, {
     method: 'POST',
     ...options,
     body: JSON.stringify({
@@ -59,7 +57,7 @@ export function addMovie(bodyObj) {
 }
 
 export function deleteMovie(id) {
-  return fetch(`${BASE_URL}/movies/${id}`, {
+  return fetch(`${PROD_URL}/movies/${id}`, {
     method: 'DELETE',
     ...options,
   })

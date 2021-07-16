@@ -1,6 +1,4 @@
-import { options } from "./constants";
-
-const BASE_URL = 'https://api.mymovies.nomoredomains.icu';
+import { options, PROD_URL } from "./constants";
 
 function checkResponse(res) {
   if(res.ok) {
@@ -12,7 +10,7 @@ function checkResponse(res) {
 }
 
 function getPromise(endPoint, bodyObj) {
-  return fetch(`${BASE_URL}${endPoint}`, {
+  return fetch(`${PROD_URL}${endPoint}`, {
     method: 'POST',
     ...options,
     body: JSON.stringify(bodyObj),
@@ -35,7 +33,7 @@ export function authorize(email, password) {
 }
 
 export function logout() {
-  return fetch(`${BASE_URL}/logout`, {
+  return fetch(`${PROD_URL}/logout`, {
     method: 'POST',
     ...options,
   })

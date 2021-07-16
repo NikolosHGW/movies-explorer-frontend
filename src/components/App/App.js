@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { addMovie, deleteMovie, editInfoUser, getInfoUser, getMovies } from '../../utils/MainApi';
 import { errorMessage500 } from '../../utils/constants';
+import { getCookie } from '../../utils/utils';
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
@@ -26,6 +27,8 @@ function App() {
     text: '',
   });
   const history = useHistory();
+
+  const cookie = getCookie('isLogged') === 'true';
 
   let userId = localStorage.getItem('id');
 
@@ -48,7 +51,7 @@ function App() {
   const handleLogin = React.useCallback((email, password, setIsLoading) => {
     authorize(email, password)
       .then(res => {
-        if(res._id) {
+        if (res._id) {
           localStorage.setItem('id', res._id);
           setIsLogged(true);
           history.push('/movies');
@@ -74,7 +77,7 @@ function App() {
   const handleLogout = React.useCallback(() => {
     logout()
       .then(() => {
-        localStorage.removeItem('id');
+        localStorage.clear();
         setIsLogged(false);
         history.push('/');
       })
@@ -121,13 +124,15 @@ function App() {
   }, [openInfoToolWithError]);
 
   React.useEffect(() => {
-    if(localStorage.getItem('id')) {
+    if (cookie) {
       setUserInfo();
+    } else {
+      setIsLogged(false);
     }
-  }, [setUserInfo, userId]);
+  }, [setUserInfo, cookie]);
 
   React.useEffect(() => {
-    if(isLogged) {
+    if (isLogged) {
       getMovies()
       .then(savedMovies => setSavedMovies(savedMovies.filter(movie => {
         return movie.owner === userId;
@@ -141,7 +146,7 @@ function App() {
 
   React.useEffect(() => {
     const prevResult = localStorage.getItem('previouslySearchResultMovies');
-    if(prevResult) {
+    if (prevResult) {
       setPrevSearchedMovies(JSON.parse(prevResult));
     }
   }, []);
