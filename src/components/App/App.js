@@ -14,7 +14,6 @@ import { useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { addMovie, deleteMovie, editInfoUser, getInfoUser, getMovies } from '../../utils/MainApi';
 import { errorMessage500 } from '../../utils/constants';
-import { getCookie } from '../../utils/utils';
 
 function App() {
   const [isLogged, setIsLogged] = React.useState(false);
@@ -27,8 +26,6 @@ function App() {
     text: '',
   });
   const history = useHistory();
-
-  const cookie = getCookie('isLogged') === 'true';
 
   let userId = localStorage.getItem('id');
 
@@ -124,12 +121,10 @@ function App() {
   }, [openInfoToolWithError]);
 
   React.useEffect(() => {
-    if (cookie) {
+    if (userId) {
       setUserInfo();
-    } else {
-      setIsLogged(false);
     }
-  }, [setUserInfo, cookie]);
+  }, [setUserInfo, userId]);
 
   React.useEffect(() => {
     if (isLogged) {

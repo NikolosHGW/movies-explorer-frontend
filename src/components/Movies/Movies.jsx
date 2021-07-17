@@ -16,31 +16,32 @@ export default function Movies({ handleSetInfoTool, saveMovie, removeMovie, save
   const [chunkMovies, setChunkMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const setPrevData = React.useCallback(({ textSearch, movies, isShort }) => {
+    const filteredMovies = getFilteredMovies(textSearch, movies, isShort);
+    setMovies(filteredMovies);
+    localStorage.setItem('previouslySearchResultMovies', JSON.stringify(filteredMovies));
+    localStorage.setItem('prevTextSearch', textSearch);
+    localStorage.setItem('prevIsShort', isShort);
+    setPrevSearchedMovies(JSON.parse(localStorage.getItem('previouslySearchResultMovies')));
+  }, [setPrevSearchedMovies]);
+
   const fetchMovies = React.useCallback((textSearch, isShort) => {
     setIsLoading(true);
     MoviesApi()
       .then(movies => {
         localStorage.setItem('movies', JSON.stringify(movies));
-        const filteredMovies = getFilteredMovies(textSearch, movies, isShort);
-        setMovies(filteredMovies);
-        localStorage.setItem('previouslySearchResultMovies', JSON.stringify(filteredMovies));
-        localStorage.setItem('prevTextSearch', textSearch);
-        setPrevSearchedMovies(JSON.parse(localStorage.getItem('previouslySearchResultMovies')));
+        setPrevData({ textSearch, movies, isShort });
         setIsLoading(false);
       })
       .catch(_res => {
         handleSetInfoTool(false, errorMessage500);
         setIsLoading(false);
       });
-  }, [handleSetInfoTool, setPrevSearchedMovies]);
+  }, [handleSetInfoTool, setPrevData]);
 
   const handleSearch = React.useCallback((textSearch, movies, isShort) => {
-    const filteredMovies = getFilteredMovies(textSearch, movies, isShort);
-    setMovies(filteredMovies);
-    localStorage.setItem('previouslySearchResultMovies', JSON.stringify(filteredMovies));
-    localStorage.setItem('prevTextSearch', textSearch);
-    setPrevSearchedMovies(JSON.parse(localStorage.getItem('previouslySearchResultMovies')));
-  }, [setPrevSearchedMovies]);
+    setPrevData({ textSearch, movies, isShort });
+  }, [setPrevData]);
 
   const changeChunkMovies = React.useCallback(() => {
     splitMovies(setChunkMovies, movies);

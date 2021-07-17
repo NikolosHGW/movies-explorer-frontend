@@ -26,6 +26,7 @@ export default function SearchForm({ searchLogic, handleSearch, handleSetInfoToo
     const prevTextSearch = localStorage.getItem('prevTextSearch');
     if (prevTextSearch && parentComponent === 'Movies') {
       setValue(prevTextSearch);
+      setChecked(localStorage.getItem('prevIsShort') === 'true');
     }
   }, [parentComponent]);
 
@@ -54,7 +55,7 @@ export default function SearchForm({ searchLogic, handleSearch, handleSetInfoToo
           className='search-form__short'
           type='checkbox'
           name='short'
-          defaultChecked={checked}
+          checked={checked}
           onChange={handleChangeChecked}
           required
         />
