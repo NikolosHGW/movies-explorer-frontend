@@ -1,4 +1,5 @@
 export function getFilteredMovies(textSearch, moviesArray, isShort = false) {
+  moviesArray = moviesArray ? moviesArray : [];
   const target = textSearch.toLowerCase();
   return moviesArray.filter(item => {
     if (item.nameRU && item.nameEN && !isShort) {
