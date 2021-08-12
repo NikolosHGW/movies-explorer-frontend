@@ -100,8 +100,13 @@ function App() {
         setCurrentUser(res);
         setIsLogged(true);
       })
-      .catch(openInfoToolWithError);
-  }, [openInfoToolWithError]);
+      .catch(err => {
+        if (err.message === 'Необходима авторизация') {
+          handleLogout();
+        }
+        openInfoToolWithError(err);
+      });
+  }, [openInfoToolWithError, handleLogout]);
 
   const saveMovie = React.useCallback((objMovie) => {
     addMovie(objMovie)
